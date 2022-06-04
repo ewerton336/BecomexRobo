@@ -1,8 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    ApiBecomexRobo.Model.Robo robo = ViewBag.Robo;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-justify">
+    <h1 class="display-4">Status do Robô</h1>
+    <Br /><br />
+
+    <form>
+        <h4>Inclinação da cabeça: @robo.Cabeca.InclinacaoCabeca.DescricaoInclinacao</h4>
+
+        <button formaction=@Url.Action("AumentarInclinacao") formmethod="post" class="btn btn-primary" > teste </button>
+        
+   
+        </form>
+
+    <form>
+        <h4>Rotação da cabeça: @robo.Cabeca.RotacaoCabeca.DescricaoRotacao</h4><br />
+ 
+
+        <h4>Cotovelo Direito: @robo.BracoDireito.CotoveloBraco.DescricaoStatusCotovelo</h4><br />
+
+        <h4>Pulso Direito: @robo.BracoDireito.PulsoBraco.DescricaoStatusPulso</h4><br />
+
+        <h4>Cotovelo Esquerdo: @robo.BracoEsquerdo.CotoveloBraco.DescricaoStatusCotovelo</h4><br />
+
+        <h4>Pulso Esquerdo: @robo.BracoEsquerdo.PulsoBraco.DescricaoStatusPulso</h4><br />
+    </form>
 </div>
+
+

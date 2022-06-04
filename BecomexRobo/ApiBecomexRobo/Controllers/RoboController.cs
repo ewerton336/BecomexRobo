@@ -63,7 +63,7 @@ namespace ApiBecomexRobo.Controllers
         ///     Exemplo requisição:
         /// 
         ///         POST /api/Robo/Cotovelo/Movimentar
-        /// </remarks>
+        /// </remark
         /// <param name="TipoCotovelo">D ou E (Direito ou Esquerdo)</param>
         /// <param name="statusCotovelo">Status 1 ao 4</param>
         /// <response code="200">Ação executada</response>
@@ -236,8 +236,9 @@ namespace ApiBecomexRobo.Controllers
         /// <response code="500">Ocorreu algo inesperado. Tente novamente mais tarde.</response>
         // POST : RoboController
         [HttpPost]
-        [Route("Cabeca/Rotacionar/Inclinar")]
-        public IActionResult InclinarCabeca(int statusNovo)
+        [Route("Cabeca/Inclinar")]
+        
+        public ActionResult InclinarCabeca(int statusNovo)
         {
             //validar status de 1 a 3 que é o limite
             if (statusNovo < 1 || statusNovo > 3)
