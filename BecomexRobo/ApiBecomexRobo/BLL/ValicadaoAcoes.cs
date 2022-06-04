@@ -7,7 +7,7 @@ namespace ApiBecomexRobo.BLL
         {
             return new Robo()
             {
-                
+
             };
         }
 

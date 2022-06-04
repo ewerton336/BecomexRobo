@@ -46,10 +46,7 @@ namespace ApiBecomexRobo.Controllers
         {
             try
             {
-                var listaTeste = new List<Robo>();
-                listaTeste.Add(RoboBecomex);
-                var RoboJson = Newtonsoft.Json.JsonConvert.SerializeObject(RoboBecomex);
-                return Ok(RoboJson);
+                return Ok(RoboBecomex);
             }
             catch (Exception)
             {
@@ -88,16 +85,16 @@ namespace ApiBecomexRobo.Controllers
             {
                 case "D":
                     //verificar se o status enviado é o mesmo do status atual
-                    if (statusNovo == RoboBecomex.BracoDireto.CotoveloBraco.StatusCotovelo)
+                    if (statusNovo == RoboBecomex.BracoDireito.CotoveloBraco.StatusCotovelo)
                         return BadRequest("Você está enviando o mesmo estado de cotovelo que o atual do robô.");
                     //validacao se não está pulando nenhum status de movimentação
-                    resultadoValidacao = validacaoAcoes.ValidarMovimentacao(RoboBecomex.BracoDireto.CotoveloBraco.StatusCotovelo, statusNovo);
+                    resultadoValidacao = validacaoAcoes.ValidarMovimentacao(RoboBecomex.BracoDireito.CotoveloBraco.StatusCotovelo, statusNovo);
                     if (resultadoValidacao)
                     {
-                        RoboBecomex.BracoDireto.CotoveloBraco.StatusCotovelo = statusNovo;
+                        RoboBecomex.BracoDireito.CotoveloBraco.StatusCotovelo = statusNovo;
                         return Ok();
                     }
-                    else return BadRequest($"Você está tentando pular um estado! Estado Atual : {RoboBecomex.BracoDireto.CotoveloBraco.StatusCotovelo}. Estado Enviado: {statusNovo}");
+                    else return BadRequest($"Você está tentando pular um estado! Estado Atual : {RoboBecomex.BracoDireito.CotoveloBraco.StatusCotovelo}. Estado Enviado: {statusNovo}");
                 case "E":
                     //verificar se o status enviado é o mesmo do status atual
                     if (statusNovo == RoboBecomex.BracoEsquerdo.CotoveloBraco.StatusCotovelo)
@@ -146,20 +143,20 @@ namespace ApiBecomexRobo.Controllers
             {
                 case "D":
                     //verificar se o status enviado é o mesmo do status atual
-                    if (statusNovo == RoboBecomex.BracoDireto.PulsoBraco.StatusPulso)
+                    if (statusNovo == RoboBecomex.BracoDireito.PulsoBraco.StatusPulso)
                         return BadRequest("Você está enviando o mesmo estado de pulso que o atual do robô.");
                     //verificar se o Cotovelo está fortemente contraído
-                    cotoveloFortementeContraido = validacaoAcoes.ValidarContracaoCotovelo(RoboBecomex.BracoDireto.CotoveloBraco.StatusCotovelo);
+                    cotoveloFortementeContraido = validacaoAcoes.ValidarContracaoCotovelo(RoboBecomex.BracoDireito.CotoveloBraco.StatusCotovelo);
                     if (cotoveloFortementeContraido == false)
-                        return BadRequest($"Para movimentar o pulso direito o cotovelo deve estar fortemente contraído. Atualmente está {RoboBecomex.BracoDireto.CotoveloBraco.DescricaoStatusCotovelo}");
+                        return BadRequest($"Para movimentar o pulso direito o cotovelo deve estar fortemente contraído. Atualmente está {RoboBecomex.BracoDireito.CotoveloBraco.DescricaoStatusCotovelo}");
                     //validacao se não está pulando nenhum status de movimentação
-                    resultadoValidacao = validacaoAcoes.ValidarMovimentacao(RoboBecomex.BracoDireto.PulsoBraco.StatusPulso, statusNovo);
+                    resultadoValidacao = validacaoAcoes.ValidarMovimentacao(RoboBecomex.BracoDireito.PulsoBraco.StatusPulso, statusNovo);
                     if (resultadoValidacao)
                     {
-                        RoboBecomex.BracoDireto.PulsoBraco.StatusPulso = statusNovo;
+                        RoboBecomex.BracoDireito.PulsoBraco.StatusPulso = statusNovo;
                         return Ok();
                     }
-                    else return BadRequest($"Você está tentando pular um estado! Estado Atual : {RoboBecomex.BracoDireto.PulsoBraco.StatusPulso}. Estado Enviado: {statusNovo}");
+                    else return BadRequest($"Você está tentando pular um estado! Estado Atual : {RoboBecomex.BracoDireito.PulsoBraco.StatusPulso}. Estado Enviado: {statusNovo}");
                 case "E":
                     //verificar se o status enviado é o mesmo do status atual
                     if (statusNovo == RoboBecomex.BracoEsquerdo.PulsoBraco.StatusPulso)

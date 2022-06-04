@@ -7,7 +7,7 @@
         /// Status da inclinação (escolher um dos 3 parâmetros)
         /// <param>
         /// 1 - Para Cima
-        /// 2 - Em Repoiso
+        /// 2 - Em Repouso
         /// 3 - Para baixo
         /// </param>
         /// </summary>
@@ -21,7 +21,7 @@
                 return StatusInclinacao switch
                 {
                     1 => "Para Cima",
-                    2 => "Em Repoiso",
+                    2 => "Em Repouso",
                     3 => "Para baixo",
                     _ => "Indefinido"
                 };
