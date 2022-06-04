@@ -12,5 +12,24 @@ namespace ApiBecomexRobo.BLL
             else return false;
 
         }
+
+        //verificar se o cotovelo está fortemente contraído para mover o pulso
+        //Status fortemente contraído = 4
+        public bool ValidarContracaoCotovelo(int statusCotovelo)
+        {
+            if (statusCotovelo == 4) return true;
+            else return false;
+        }
+
+        //verificar se a inclinação da cabeça está para baixo
+        //inclinação para baixo = 3
+        public bool ValidarInclinacaoParaBaixo (int statusInclinacao)
+        {
+            if (statusInclinacao == 3)
+                return true;
+            else return false;
+        }
+
+
     }
 }
