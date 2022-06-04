@@ -63,7 +63,7 @@ namespace ApiBecomexRobo.Controllers
         /// <remarks>
         ///     Exemplo requisição:
         /// 
-        ///         POST /api/Robo/Cotovelo
+        ///         POST /api/Robo/Cotovelo/Movimentar
         /// </remarks>
         /// <param name="TipoCotovelo">D ou E (Direito ou Esquerdo)</param>
         /// <param name="statusCotovelo">Status 1 ao 4</param>
@@ -72,7 +72,7 @@ namespace ApiBecomexRobo.Controllers
         /// <response code="500">Ocorreu algo inesperado. Tente novamente mais tarde.</response>
         // POST : RoboController
         [HttpPost]
-        [Route("Cotovelo")]
+        [Route("Cotovelo/Movimentar")]
         public IActionResult MovimentarCotovelo(string ladoCotovelo, int statusNovo)
         {
             //validar status de 1 a 4, que é olimite
@@ -85,6 +85,9 @@ namespace ApiBecomexRobo.Controllers
             switch (ladoCotovelo)
             {
                 case "D":
+                    //verificar se o status enviado é o mesmo do status atual
+                    if (statusNovo == RoboBecomex.BracoDireto.CotoveloBraco.StatusCotovelo)
+                        return BadRequest("Você está enviando o mesmo estado de cotovelo que o atual do robô.");
                     //validacao se não está pulando nenhum status de movimentação
                     resultadoValidacao = validacaoAcoes.ValidarMovimentacao(RoboBecomex.BracoDireto.CotoveloBraco.StatusCotovelo, statusNovo);
                     if (resultadoValidacao)
@@ -94,6 +97,9 @@ namespace ApiBecomexRobo.Controllers
                     }
                     else return BadRequest($"Você está tentando pular um estado! Estado Atual : {RoboBecomex.BracoDireto.CotoveloBraco.StatusCotovelo}. Estado Enviado: {statusNovo}");
                 case "E":
+                    //verificar se o status enviado é o mesmo do status atual
+                    if (statusNovo == RoboBecomex.BracoEsquerdo.CotoveloBraco.StatusCotovelo)
+                        return BadRequest("Você está enviando o mesmo estado de cotovelo que o atual do robô.");  
                     //validacao se não está pulando nenhum status de movimentação
                     resultadoValidacao = validacaoAcoes.ValidarMovimentacao(RoboBecomex.BracoEsquerdo.CotoveloBraco.StatusCotovelo, statusNovo);
                     if (resultadoValidacao)
@@ -114,7 +120,7 @@ namespace ApiBecomexRobo.Controllers
         /// <remarks>
         ///     Exemplo requisição:
         /// 
-        ///         POST /api/Robo/Pulso
+        ///         POST /api/Robo/Pulso/Movimentar
         /// </remarks>
         /// <param name="ladoPulso">D ou E (Direito ou Esquerdo)</param>
         /// <param name="statusNovo">Status 1 ao 4</param>
@@ -123,7 +129,7 @@ namespace ApiBecomexRobo.Controllers
         /// <response code="500">Ocorreu algo inesperado. Tente novamente mais tarde.</response>
         // POST : RoboController
         [HttpPost]
-        [Route("Pulso")]
+        [Route("Pulso/Movimentar")]
         public IActionResult MovimentarPulso(string ladoPulso, int statusNovo)
         {
             //validar status de 1 a 7, que é olimite
@@ -137,6 +143,9 @@ namespace ApiBecomexRobo.Controllers
             switch (ladoPulso)
             {
                 case "D":
+                    //verificar se o status enviado é o mesmo do status atual
+                    if (statusNovo == RoboBecomex.BracoDireto.PulsoBraco.StatusPulso)
+                        return BadRequest("Você está enviando o mesmo estado de pulso que o atual do robô.");
                     //verificar se o Cotovelo está fortemente contraído
                     cotoveloFortementeContraido = validacaoAcoes.ValidarContracaoCotovelo(RoboBecomex.BracoDireto.CotoveloBraco.StatusCotovelo);
                     if (cotoveloFortementeContraido == false)
@@ -150,9 +159,12 @@ namespace ApiBecomexRobo.Controllers
                     }
                     else return BadRequest($"Você está tentando pular um estado! Estado Atual : {RoboBecomex.BracoDireto.PulsoBraco.StatusPulso}. Estado Enviado: {statusNovo}");
                 case "E":
+                    //verificar se o status enviado é o mesmo do status atual
+                    if (statusNovo == RoboBecomex.BracoEsquerdo.PulsoBraco.StatusPulso)
+                        return BadRequest("Você está enviando o mesmo estado de pulso que o atual do robô.");
                     //verificar se o Cotovelo está fortemente contraído
                     cotoveloFortementeContraido = validacaoAcoes.ValidarContracaoCotovelo(RoboBecomex.BracoEsquerdo.CotoveloBraco.StatusCotovelo);
-                    if (RoboBecomex.BracoEsquerdo.CotoveloBraco.StatusCotovelo != 4)
+                   if (cotoveloFortementeContraido == false)
                         return BadRequest($"Para movimentar o pulso esquerdo o cotovelo deve estar fortemente contraído. Atualmente está {RoboBecomex.BracoEsquerdo.CotoveloBraco.DescricaoStatusCotovelo}");
                     //validacao se não está pulando nenhum status de movimentação
                     resultadoValidacao = validacaoAcoes.ValidarMovimentacao(RoboBecomex.BracoEsquerdo.PulsoBraco.StatusPulso, statusNovo);
@@ -191,6 +203,9 @@ namespace ApiBecomexRobo.Controllers
             {
                 return BadRequest("Status de rotação de Cabeça Inválido! O status deve ser de 1 a 5.");
             }
+            //verificar se o status enviado é o mesmo do status atual
+            if (statusNovo == RoboBecomex.Cabeca.RotacaoCabeca.StatusRotacao)
+                return BadRequest("Você está enviando o mesmo estado de rotação que o atual do robô.");
             bool resultadoValidacao;
             bool inclinacaoParaBaixo;
             //verificar se a inclinação está para baixo
@@ -230,6 +245,9 @@ namespace ApiBecomexRobo.Controllers
             {
                 return BadRequest("Status de rotação de Cabeça Inválido! O status deve ser de 1 a 3.");
             }
+            //verificar se o status enviado é o mesmo do status atual
+            if (statusNovo == RoboBecomex.Cabeca.InclinacaoCabeca.StatusInclinacao)
+                return BadRequest("Você está enviando o mesmo estado de inclinação que o atual do robô.");
             bool resultadoValidacao;
             //validacao se não está pulando nenhum status de movimentação
             resultadoValidacao = validacaoAcoes.ValidarMovimentacao(RoboBecomex.Cabeca.InclinacaoCabeca.StatusInclinacao, statusNovo);
