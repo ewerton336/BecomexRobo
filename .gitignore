@@ -1,0 +1,7 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/BecomexRobo/.vs/BecomexRobo/v17
+/BecomexRobo/.vs/BecomexRobo/FileContentIndex
+/BecomexRobo/ApiBecomexRobo/obj
