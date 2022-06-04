@@ -3,6 +3,14 @@ namespace ApiBecomexRobo.BLL
 {
     public class ValicadaoAcoes
     {
+        public Robo FabricarRobo()
+        {
+            return new Robo()
+            {
+                
+            };
+        }
+
         public bool ValidarMovimentacao(int movimentacaoAtual, int movimentacaoNova)
         {
             if (movimentacaoAtual - movimentacaoNova == 1 || movimentacaoAtual - movimentacaoNova == -1)

@@ -8,7 +8,7 @@ namespace ApiBecomexRobo.Controllers
     [ApiController]
     [Route("api/Robo")]
     [Produces("application/json")]
-    public class RoboController : Controller
+    public class RoboController : ControllerBase
     {
         private static Robo? robo;
 
@@ -46,6 +46,8 @@ namespace ApiBecomexRobo.Controllers
         {
             try
             {
+                var listaTeste = new List<Robo>();
+                listaTeste.Add(RoboBecomex);
                 var RoboJson = Newtonsoft.Json.JsonConvert.SerializeObject(RoboBecomex);
                 return Ok(RoboJson);
             }
