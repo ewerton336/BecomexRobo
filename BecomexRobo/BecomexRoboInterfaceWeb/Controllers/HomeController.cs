@@ -52,10 +52,7 @@ namespace BecomexRoboInterfaceWeb.Controllers
         {
             //quanto maior o status, menor a inclinação
             robo.Cabeca.InclinacaoCabeca.StatusInclinacao++;
-            var json = JsonConvert.SerializeObject(robo.Cabeca.InclinacaoCabeca);
-            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-            ViewBag.Robo = robo;
-            var response = client.PostAsync(urlLocalRoboInclCabeca, httpContent).Result;
+            EnviarInclinacaoApi();
             return View("Index");
         }
 
@@ -64,11 +61,16 @@ namespace BecomexRoboInterfaceWeb.Controllers
         {
             //quanto menor o status, mais alta a inclinação
             robo.Cabeca.InclinacaoCabeca.StatusInclinacao--;
+            EnviarInclinacaoApi();
+            return View("Index");
+        }
+
+        public void EnviarInclinacaoApi()
+        {
             var json = JsonConvert.SerializeObject(robo.Cabeca.InclinacaoCabeca);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             ViewBag.Robo = robo;
-            var response = client.PostAsync(urlLocalRoboInclCabeca, httpContent).Result;
-            return View("Index");
+            client.PostAsync(urlLocalRoboInclCabeca, httpContent);
         }
 
         public IActionResult Privacy()

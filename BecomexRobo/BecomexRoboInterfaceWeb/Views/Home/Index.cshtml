@@ -20,7 +20,7 @@
                 <button formaction=@Url.Action("AumentarInclinacao") formmethod="post" class="btn btn-secondary" disabled> Cima </button>
             }
         }
-           @{
+        @{
             if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao != 3)
             {
                 <button formaction=@Url.Action("DiminuirInclinacao") formmethod="post" class="btn btn-outline-danger"> Baixo </button>
@@ -28,11 +28,11 @@
             else
             {
                 //desabilitar botão caso esteja no mínimo
-                 <button formaction=@Url.Action("DiminuirInclinacao") formmethod="post" class="btn btn-secondary" disabled> Baixo </button>
+                <button formaction=@Url.Action("DiminuirInclinacao") formmethod="post" class="btn btn-secondary" disabled> Baixo </button>
             }
         }
 
-     
+
 
 
     </form>
