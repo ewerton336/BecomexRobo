@@ -17,6 +17,8 @@ namespace BecomexRoboInterfaceWeb.Controllers
         private const string urlLocalRoboInclCabeca = "https://localhost:7288/api/Robo/Cabeca/Inclinar";
 
         private HttpClient client = new HttpClient();
+        private static bool roboCriado = false;
+        private static Robo robo;
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -27,9 +29,16 @@ namespace BecomexRoboInterfaceWeb.Controllers
         {
             try
             {
-                var response = client.GetAsync(urlLocalRobo).Result;
-                var resposta = response.Content.ReadAsStringAsync().Result;
-                ViewBag.Robo = JsonConvert.DeserializeObject<Robo>(resposta);
+                //caso não tenha instanciado um robô, é criado um
+                if (roboCriado == false)
+                {
+                    var response = client.GetAsync(urlLocalRobo).Result;
+                    var resposta = response.Content.ReadAsStringAsync().Result;
+                    roboCriado = true;
+                    var novoRobo = JsonConvert.DeserializeObject<Robo>(resposta);
+                    robo = novoRobo;
+                    ViewBag.Robo = robo;
+                }
                 return View(ViewBag.Robo);
             }
             catch (Exception)
@@ -38,14 +47,28 @@ namespace BecomexRoboInterfaceWeb.Controllers
             }
         }
 
-        [HttpPost, ActionName("AumentarInclinacao")]
-        public IActionResult AumentarInclinacao(Robo robo)
+        [HttpPost, ActionName("DiminuirInclinacao")]
+        public IActionResult DiminuirInclinacao()
         {
-            var teste = JsonConvert.SerializeObject(robo.Cabeca.InclinacaoCabeca.StatusInclinacao++);
-            var httpContent = new StringContent(teste, Encoding.UTF8, "application/json");
+            //quanto maior o status, menor a inclinação
+            robo.Cabeca.InclinacaoCabeca.StatusInclinacao++;
+            var json = JsonConvert.SerializeObject(robo.Cabeca.InclinacaoCabeca);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            ViewBag.Robo = robo;
+            var response = client.PostAsync(urlLocalRoboInclCabeca, httpContent).Result;
+            return View("Index");
+        }
 
-            var response = client.PostAsync(urlLocalRoboInclCabeca, httpContent).Result; 
-            return View(ViewBag.Robo);
+        [HttpPost, ActionName("AumentarInclinacao")]
+        public IActionResult AumentarInclinacao()
+        {
+            //quanto menor o status, mais alta a inclinação
+            robo.Cabeca.InclinacaoCabeca.StatusInclinacao--;
+            var json = JsonConvert.SerializeObject(robo.Cabeca.InclinacaoCabeca);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            ViewBag.Robo = robo;
+            var response = client.PostAsync(urlLocalRoboInclCabeca, httpContent).Result;
+            return View("Index");
         }
 
         public IActionResult Privacy()

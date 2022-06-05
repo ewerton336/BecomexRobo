@@ -35,7 +35,7 @@
 
         public Inclinacao()
         {
-            StatusInclinacao = 2;
+             StatusInclinacao = 2;
         }
     }
 }

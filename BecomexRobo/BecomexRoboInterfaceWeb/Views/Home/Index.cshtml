@@ -9,15 +9,37 @@
 
     <form>
         <h4>Inclinação da cabeça: @robo.Cabeca.InclinacaoCabeca.DescricaoInclinacao</h4>
+        @{
+            if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao != 1)
+            {
+                <button formaction=@Url.Action("AumentarInclinacao") formmethod="post" class="btn btn-outline-primary"> Cima </button>
+            }
+            else
+            {
+                //desabilitar botao caso esteja no máximo
+                <button formaction=@Url.Action("AumentarInclinacao") formmethod="post" class="btn btn-secondary" disabled> Cima </button>
+            }
+        }
+           @{
+            if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao != 3)
+            {
+                <button formaction=@Url.Action("DiminuirInclinacao") formmethod="post" class="btn btn-outline-danger"> Baixo </button>
+            }
+            else
+            {
+                //desabilitar botão caso esteja no mínimo
+                 <button formaction=@Url.Action("DiminuirInclinacao") formmethod="post" class="btn btn-secondary" disabled> Baixo </button>
+            }
+        }
 
-        <button formaction=@Url.Action("AumentarInclinacao") formmethod="post" class="btn btn-primary" > teste </button>
-        
-   
-        </form>
+     
+
+
+    </form>
 
     <form>
         <h4>Rotação da cabeça: @robo.Cabeca.RotacaoCabeca.DescricaoRotacao</h4><br />
- 
+
 
         <h4>Cotovelo Direito: @robo.BracoDireito.CotoveloBraco.DescricaoStatusCotovelo</h4><br />
 
