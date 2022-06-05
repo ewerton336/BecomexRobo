@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "R.O.B.O";
     ApiBecomexRobo.Model.Robo robo = ViewBag.Robo;
 }
 
@@ -11,10 +11,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>
+                    <th class="col-md-8">
                         <h4>Inclinação da cabeça: @robo.Cabeca.InclinacaoCabeca.DescricaoInclinacao</h4>
                     </th>
-                    <th>
+                    <th class="col-md-2">
                         @{
                             if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao != 1)
                             {
@@ -27,7 +27,7 @@
                             }
                         }
                     </th>
-                    <th>
+                    <th class="col-md-2">
                         @{
                             if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao != 3)
                             {
@@ -44,11 +44,11 @@
             </thead>
             <thead>
                 <tr>
-                    <th>
+                    <th class="col-md-8">
                         <h4>Rotação da cabeça: @robo.Cabeca.RotacaoCabeca.DescricaoRotacao</h4>
                     </th>
 
-                    <th>
+                    <th class="col-md-2">
                         @{
                             if (robo.Cabeca.RotacaoCabeca.StatusRotacao != 1)
                             {
@@ -61,7 +61,7 @@
                             }
                         }
                     </th>
-                    <th>
+                    <th class="col-md-2">
                         @{
                             if (robo.Cabeca.RotacaoCabeca.StatusRotacao != 5)
                             {
@@ -79,49 +79,49 @@
 
             <thead>
                 <tr>
-                    <th>
+                    <th class="col-md-8">
                         <h4>Cotovelo Direito: @robo.BracoDireito.CotoveloBraco.DescricaoStatusCotovelo</h4>
                     </th>
 
-                    <th>
-                        @{
-                            if (robo.BracoDireito.CotoveloBraco.StatusCotovelo != 1)
-                            {
+                    <th class="col-md-2">
+                            @{
+                                if (robo.BracoDireito.CotoveloBraco.StatusCotovelo != 1)
+                                {
                                 <button name="button" value="DescontrairD" formmethod="post" asp-action="AjustarCotovelo" class="btn btn-outline-primary">Descontrair</button>
-                            }
-                            else
-                            {
-                                //desabilitar botao caso esteja no máximo
+                                }
+                                else
+                                {
+                                    //desabilitar botao caso esteja no máximo
                                 <button name="button" class="btn btn-secondary" disabled> Descontrair </button>
+                                }
                             }
-                        }
                     </th>
-                    <th>
-                        @{
-                            if (robo.BracoDireito.CotoveloBraco.StatusCotovelo != 4)
-                            {
+                    <th class="col-md-2">
+                            @{
+                                if (robo.BracoDireito.CotoveloBraco.StatusCotovelo != 4)
+                                {
                                 <button name="button" value="ContrairD" formmethod="post" asp-action="AjustarCotovelo" class="btn btn-outline-danger">Contrair</button>
-                            }
-                            else
-                            {
-                                //desabilitar botão caso esteja no mínimo
+                                }
+                                else
+                                {
+                                    //desabilitar botão caso esteja no mínimo
                                 <button name="button" class="btn btn-secondary" disabled> Contrair </button>
+                                }
                             }
-                        }
                     </th>
                 </tr>
             </thead>
 
             <thead>
                 <tr>
-                    <th>
+                    <th class="col-md-8">
                         <h4>Pulso Direito: @robo.BracoDireito.PulsoBraco.DescricaoStatusPulso</h4>
                     </th>
-                    <th>
+                    <th class="col-md-2">
                         @{
                             if (robo.BracoDireito.CotoveloBraco.StatusCotovelo != 4)
                             {
-                                  <button name="button" class="btn btn-secondary" disabled> Esquerda </button>
+                                <button name="button" class="btn btn-secondary" disabled> Esquerda </button>
                             }
                             else
                             {
@@ -137,12 +137,12 @@
                             }
                         }
                     </th>
-                    <th>
-                         
+                    <th class="col-md-2">
+
                         @{
                             if (robo.BracoDireito.CotoveloBraco.StatusCotovelo != 4)
                             {
-                                  <button name="button" class="btn btn-secondary" disabled> Direita </button>
+                                <button name="button" class="btn btn-secondary" disabled> Direita </button>
                             }
                             else
                             {
@@ -158,15 +158,15 @@
                             }
                         }
                     </th>
-                   
+
                 </tr>
             </thead>
             <thead>
                 <tr>
-                    <th>
+                    <th class="col-md-8">
                         <h4>Cotovelo Esquerdo: @robo.BracoEsquerdo.CotoveloBraco.DescricaoStatusCotovelo</h4>
                     </th>
-                    <th>
+                    <th class="col-md-2">
                         @{
                             if (robo.BracoEsquerdo.CotoveloBraco.StatusCotovelo != 1)
                             {
@@ -179,7 +179,7 @@
                             }
                         }
                     </th>
-                    <th>
+                    <th class="col-md-2">
                         @{
                             if (robo.BracoEsquerdo.CotoveloBraco.StatusCotovelo != 4)
                             {
@@ -196,14 +196,14 @@
             </thead>
             <thead>
                 <tr>
-                    <th>
+                    <th class="col-md-8">
                         <h4>Pulso Esquerdo: @robo.BracoEsquerdo.PulsoBraco.DescricaoStatusPulso</h4>
                     </th>
-                    <th>
+                    <th class="col-md-2">
                         @{
                             if (robo.BracoEsquerdo.CotoveloBraco.StatusCotovelo != 4)
                             {
-                                  <button name="button" class="btn btn-secondary" disabled> Esquerda </button>
+                                <button name="button" class="btn btn-secondary" disabled> Esquerda </button>
                             }
                             else
                             {
@@ -219,12 +219,11 @@
                             }
                         }
                     </th>
-                    <th>
-                         
+                    <th class="col-md-2">
                         @{
                             if (robo.BracoEsquerdo.CotoveloBraco.StatusCotovelo != 4)
                             {
-                                  <button name="button" class="btn btn-secondary" disabled> Direita </button>
+                                <button name="button" class="btn btn-secondary" disabled> Direita </button>
                             }
                             else
                             {
@@ -240,7 +239,7 @@
                             }
                         }
                     </th>
-                   
+
                 </tr>
             </thead>
         </table>

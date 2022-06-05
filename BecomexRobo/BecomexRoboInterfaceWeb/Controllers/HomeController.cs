@@ -37,8 +37,8 @@ namespace BecomexRoboInterfaceWeb.Controllers
                     roboCriado = true;
                     var novoRobo = JsonConvert.DeserializeObject<Robo>(resposta);
                     robo = novoRobo;
-                    ViewBag.Robo = robo;
                 }
+                ViewBag.Robo = robo;
                 return View(ViewBag.Robo);
             }
             catch (Exception)
