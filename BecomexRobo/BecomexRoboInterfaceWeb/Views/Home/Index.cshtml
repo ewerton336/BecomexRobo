@@ -50,27 +50,41 @@
 
                     <th class="col-md-2">
                         @{
-                            if (robo.Cabeca.RotacaoCabeca.StatusRotacao != 1)
+                            if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao == 3)
                             {
-                                <button name="button" value="Esquerda" formmethod="post" asp-action="AjustarRotacao" class="btn btn-outline-primary">Esquerda</button>
+                                 <button name="button" class="btn btn-secondary" disabled> Esquerda </button>
                             }
                             else
                             {
+                                if (robo.Cabeca.RotacaoCabeca.StatusRotacao != 1)
+                                {
+                                    <button name="button" value="Esquerda" formmethod="post" asp-action="AjustarRotacao" class="btn btn-outline-primary">Esquerda</button>
+                                }
+                                else
+                                {
                                 //desabilitar botao caso esteja no máximo
-                                <button name="button" class="btn btn-secondary" disabled> Esquerda </button>
+                                    <button name="button" class="btn btn-secondary" disabled> Esquerda </button>
+                                }
                             }
                         }
                     </th>
                     <th class="col-md-2">
                         @{
-                            if (robo.Cabeca.RotacaoCabeca.StatusRotacao != 5)
+                            if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao == 3)
                             {
-                                <button name="button" value="Direita" formmethod="post" asp-action="AjustarRotacao" class="btn btn-outline-danger">Direita</button>
+                                  <button name="button" class="btn btn-secondary" disabled> Direita </button>
                             }
                             else
                             {
+                                if (robo.Cabeca.RotacaoCabeca.StatusRotacao != 5)
+                                {
+                                    <button name="button" value="Direita" formmethod="post" asp-action="AjustarRotacao" class="btn btn-outline-danger">Direita</button>
+                                }
+                                else
+                                {
                                 //desabilitar botão caso esteja no mínimo
-                                <button name="button" class="btn btn-secondary" disabled> Direita </button>
+                                    <button name="button" class="btn btn-secondary" disabled> Direita </button>
+                                }
                             }
                         }
                     </th>

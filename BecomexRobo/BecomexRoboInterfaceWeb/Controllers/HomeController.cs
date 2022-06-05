@@ -29,15 +29,11 @@ namespace BecomexRoboInterfaceWeb.Controllers
         {
             try
             {
-                //caso não tenha instanciado um robô, é criado um
-                if (roboCriado == false)
-                {
-                    var response = client.GetAsync(urlLocalRobo).Result;
-                    var resposta = response.Content.ReadAsStringAsync().Result;
-                    roboCriado = true;
-                    var novoRobo = JsonConvert.DeserializeObject<Robo>(resposta);
-                    robo = novoRobo;
-                }
+                var response = client.GetAsync(urlLocalRobo).Result;
+                var resposta = response.Content.ReadAsStringAsync().Result;
+                roboCriado = true;
+                var novoRobo = JsonConvert.DeserializeObject<Robo>(resposta);
+                robo = novoRobo;
                 ViewBag.Robo = robo;
                 return View(ViewBag.Robo);
             }
@@ -65,7 +61,7 @@ namespace BecomexRoboInterfaceWeb.Controllers
             }
             var json = JsonConvert.SerializeObject(robo.Cabeca.InclinacaoCabeca);
             EnviarAlteracoesParaApi(json, urlLocalRoboInclCabeca);
-            return View("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost, ActionName("AjustarRotacao")]
@@ -84,9 +80,9 @@ namespace BecomexRoboInterfaceWeb.Controllers
                 default:
                     return BadRequest("Status de botão inválido");
             }
-            var json = JsonConvert.SerializeObject(robo.Cabeca.InclinacaoCabeca);
+            var json = JsonConvert.SerializeObject(robo.Cabeca.RotacaoCabeca);
             EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
-            return View("Index");
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -99,31 +95,35 @@ namespace BecomexRoboInterfaceWeb.Controllers
                 case "DescontrairD":
                     //quanto menor o status, menor a contração
                     robo.BracoDireito.CotoveloBraco.StatusCotovelo--;
+                    robo.BracoDireito.CotoveloBraco.LadoCotovelo = "D";
                     json = JsonConvert.SerializeObject(robo.BracoDireito.CotoveloBraco);
-                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboMovCotovelo);
                     break;
                 case "ContrairD":
                     //quanto maior o status, maior a contração
                     robo.BracoDireito.CotoveloBraco.StatusCotovelo++;
+                    robo.BracoDireito.CotoveloBraco.LadoCotovelo = "D";
                     json = JsonConvert.SerializeObject(robo.BracoDireito.CotoveloBraco);
-                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboMovCotovelo);
                     break;
                 case "DescontrairE":
                     //quanto maior o status, maior a contração
                     robo.BracoEsquerdo.CotoveloBraco.StatusCotovelo--;
+                    robo.BracoEsquerdo.CotoveloBraco.LadoCotovelo = "E";
                     json = JsonConvert.SerializeObject(robo.BracoEsquerdo.CotoveloBraco);
-                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboMovCotovelo);
                     break;
                 case "ContrairE":
                     //quanto maior o status, maior a contração
                     robo.BracoEsquerdo.CotoveloBraco.StatusCotovelo++;
+                    robo.BracoEsquerdo.CotoveloBraco.LadoCotovelo = "E";
                     json = JsonConvert.SerializeObject(robo.BracoEsquerdo.CotoveloBraco);
-                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboMovCotovelo);
                     break;
                 default:
                     return BadRequest("Status de botão inválido");
             }
-            return View("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost, ActionName("AjustarPulso")]
@@ -138,48 +138,45 @@ namespace BecomexRoboInterfaceWeb.Controllers
                 case "DireitaD":
                     //braço direito virar para direita
                     robo.BracoDireito.PulsoBraco.StatusPulso++;
+                    robo.BracoDireito.PulsoBraco.LadoPulso = "D";
                     json = JsonConvert.SerializeObject(robo.BracoDireito.PulsoBraco);
-                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboMovPulso);
                     break;
                 case "DireitaE":
                     //braço direito virar para esquerda
                     robo.BracoDireito.PulsoBraco.StatusPulso--;
+                    robo.BracoDireito.PulsoBraco.LadoPulso = "D";
                     json = JsonConvert.SerializeObject(robo.BracoDireito.PulsoBraco);
-                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboMovPulso);
                     break;
                 case "EsquerdaD":
                     //braço esquerdo virar para direita
                     robo.BracoEsquerdo.PulsoBraco.StatusPulso++;
+                    robo.BracoEsquerdo.PulsoBraco.LadoPulso = "E";
                     json = JsonConvert.SerializeObject(robo.BracoEsquerdo.PulsoBraco);
-                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboMovPulso);
                     break;
                 case "EsquerdaE":
                     //braço esquerdo virar para esquerda
                     robo.BracoEsquerdo.PulsoBraco.StatusPulso--;
+                    robo.BracoEsquerdo.PulsoBraco.LadoPulso = "E";
                     json = JsonConvert.SerializeObject(robo.BracoEsquerdo.PulsoBraco);
-                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboMovPulso);
                     break;
                 default:
                     return BadRequest("Status de botão inválido");
             }
-            return View("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         private void EnviarAlteracoesParaApi(string json, string url)
         {
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+            var result = client.PostAsync(url, httpContent).Result;
+            var response = result.Content.ReadAsStringAsync().Result;
+            var RoboResposta = JsonConvert.DeserializeObject<Robo>(response);
+            robo = RoboResposta;
             ViewBag.Robo = robo;
-            client.PostAsync(url, httpContent);
-        }
-
-
-
-
-
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

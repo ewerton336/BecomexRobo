@@ -92,7 +92,7 @@ namespace ApiBecomexRobo.Controllers
                     if (resultadoValidacao)
                     {
                         RoboBecomex.BracoDireito.CotoveloBraco.StatusCotovelo = cotovelo.StatusCotovelo;
-                        return Ok();
+                        return Ok(RoboBecomex);
                     }
                     else return BadRequest($"Você está tentando pular um estado! Estado Atual : {RoboBecomex.BracoDireito.CotoveloBraco.StatusCotovelo}. Estado Enviado: {cotovelo.StatusCotovelo}");
                 case "E":
@@ -104,7 +104,7 @@ namespace ApiBecomexRobo.Controllers
                     if (resultadoValidacao)
                     {
                         RoboBecomex.BracoEsquerdo.CotoveloBraco.StatusCotovelo = cotovelo.StatusCotovelo;
-                        return Ok();
+                        return Ok(RoboBecomex);
                     }
                     else return BadRequest($"Você está tentando pular um estado! Estado Atual : {RoboBecomex.BracoEsquerdo.CotoveloBraco.StatusCotovelo}. Estado Enviado: {cotovelo.StatusCotovelo}");
                 default:
@@ -154,7 +154,7 @@ namespace ApiBecomexRobo.Controllers
                     if (resultadoValidacao)
                     {
                         RoboBecomex.BracoDireito.PulsoBraco.StatusPulso = pulso.StatusPulso;
-                        return Ok();
+                        return Ok(RoboBecomex);
                     }
                     else return BadRequest($"Você está tentando pular um estado! Estado Atual : {RoboBecomex.BracoDireito.PulsoBraco.StatusPulso}. Estado Enviado: {pulso.StatusPulso}");
                 case "E":
@@ -170,7 +170,7 @@ namespace ApiBecomexRobo.Controllers
                     if (resultadoValidacao)
                     {
                         RoboBecomex.BracoEsquerdo.PulsoBraco.StatusPulso = pulso.StatusPulso;
-                        return Ok();
+                        return Ok(RoboBecomex);
                     }
                     else return BadRequest($"Você está tentando pular um estado! Estado Atual : {RoboBecomex.BracoEsquerdo.PulsoBraco.StatusPulso}. Estado Enviado: {pulso.StatusPulso}");
                 default:
@@ -216,7 +216,7 @@ namespace ApiBecomexRobo.Controllers
             if (resultadoValidacao)
             {
                 RoboBecomex.Cabeca.RotacaoCabeca.StatusRotacao = rotacao.StatusRotacao;
-                return Ok();
+                return Ok(RoboBecomex);
             }
             else return BadRequest($"Você está tentando pular um estado! Estado Atual : {RoboBecomex.Cabeca.InclinacaoCabeca.StatusInclinacao}. Estado Enviado: {rotacao.StatusRotacao}");
         }
@@ -254,7 +254,7 @@ namespace ApiBecomexRobo.Controllers
             if (resultadoValidacao)
             {
                 RoboBecomex.Cabeca.InclinacaoCabeca.StatusInclinacao = inclinacao.StatusInclinacao;
-                return Ok();
+                return Ok(RoboBecomex);
             }
             else return BadRequest($"Você está tentando pular um estado! Estado Atual : {RoboBecomex.Cabeca.InclinacaoCabeca.StatusInclinacao}. Estado Enviado: {inclinacao.StatusInclinacao}");
         }
