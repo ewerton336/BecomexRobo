@@ -12,7 +12,7 @@
         /// 7 - Rotação para 180º
         */
         public int StatusPulso { get; set; }
-      
+      public string LadoPulso { get; set; }
         public string DescricaoStatusPulso
         {
             get

@@ -12,6 +12,7 @@
         /// </param>
         /// </summary>
         public int StatusCotovelo { get; set; }
+        public string LadoCotovelo { get; set; }
 
         public string DescricaoStatusCotovelo
         {
