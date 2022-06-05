@@ -8,70 +8,244 @@
     <Br /><br />
 
     <form>
-        <h4>Inclinação da cabeça: @robo.Cabeca.InclinacaoCabeca.DescricaoInclinacao</h4>
-        @{
-            if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao != 1)
-            {
-                <button name="button" value="Cima" formmethod="post" asp-action="AjustarInclinacao" class="btn btn-outline-primary">Cima</button>
-            }
-            else
-            {
-            //desabilitar botao caso esteja no máximo
-                  <button name="button" class="btn btn-secondary" disabled> Cima </button>
-            }
-        }
-        @{
-            if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao != 3)
-            {
-                <button name="button" value="Baixo" formmethod="post" asp-action="AjustarInclinacao" class="btn btn-outline-danger">Baixo</button>
-            }
-            else
-            {
-            //desabilitar botão caso esteja no mínimo
-                <button name="button" class="btn btn-secondary" disabled> Baixo </button>
-            }
-        }
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <h4>Inclinação da cabeça: @robo.Cabeca.InclinacaoCabeca.DescricaoInclinacao</h4>
+                    </th>
+                    <th>
+                        @{
+                            if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao != 1)
+                            {
+                                <button name="button" value="Cima" formmethod="post" asp-action="AjustarInclinacao" class="btn btn-outline-primary">Cima</button>
+                            }
+                            else
+                            {
+                                //desabilitar botao caso esteja no máximo
+                                <button name="button" class="btn btn-secondary" disabled> Cima </button>
+                            }
+                        }
+                    </th>
+                    <th>
+                        @{
+                            if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao != 3)
+                            {
+                                <button name="button" value="Baixo" formmethod="post" asp-action="AjustarInclinacao" class="btn btn-outline-danger">Baixo</button>
+                            }
+                            else
+                            {
+                                //desabilitar botão caso esteja no mínimo
+                                <button name="button" class="btn btn-secondary" disabled> Baixo </button>
+                            }
+                        }
+                    </th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th>
+                        <h4>Rotação da cabeça: @robo.Cabeca.RotacaoCabeca.DescricaoRotacao</h4>
+                    </th>
 
+                    <th>
+                        @{
+                            if (robo.Cabeca.RotacaoCabeca.StatusRotacao != 1)
+                            {
+                                <button name="button" value="Esquerda" formmethod="post" asp-action="AjustarRotacao" class="btn btn-outline-primary">Esquerda</button>
+                            }
+                            else
+                            {
+                                //desabilitar botao caso esteja no máximo
+                                <button name="button" class="btn btn-secondary" disabled> Esquerda </button>
+                            }
+                        }
+                    </th>
+                    <th>
+                        @{
+                            if (robo.Cabeca.RotacaoCabeca.StatusRotacao != 5)
+                            {
+                                <button name="button" value="Direita" formmethod="post" asp-action="AjustarRotacao" class="btn btn-outline-danger">Direita</button>
+                            }
+                            else
+                            {
+                                //desabilitar botão caso esteja no mínimo
+                                <button name="button" class="btn btn-secondary" disabled> Direita </button>
+                            }
+                        }
+                    </th>
+                </tr>
+            </thead>
 
+            <thead>
+                <tr>
+                    <th>
+                        <h4>Cotovelo Direito: @robo.BracoDireito.CotoveloBraco.DescricaoStatusCotovelo</h4>
+                    </th>
 
+                    <th>
+                        @{
+                            if (robo.BracoDireito.CotoveloBraco.StatusCotovelo != 1)
+                            {
+                                <button name="button" value="DescontrairD" formmethod="post" asp-action="AjustarCotovelo" class="btn btn-outline-primary">Descontrair</button>
+                            }
+                            else
+                            {
+                                //desabilitar botao caso esteja no máximo
+                                <button name="button" class="btn btn-secondary" disabled> Descontrair </button>
+                            }
+                        }
+                    </th>
+                    <th>
+                        @{
+                            if (robo.BracoDireito.CotoveloBraco.StatusCotovelo != 4)
+                            {
+                                <button name="button" value="ContrairD" formmethod="post" asp-action="AjustarCotovelo" class="btn btn-outline-danger">Contrair</button>
+                            }
+                            else
+                            {
+                                //desabilitar botão caso esteja no mínimo
+                                <button name="button" class="btn btn-secondary" disabled> Contrair </button>
+                            }
+                        }
+                    </th>
+                </tr>
+            </thead>
 
+            <thead>
+                <tr>
+                    <th>
+                        <h4>Pulso Direito: @robo.BracoDireito.PulsoBraco.DescricaoStatusPulso</h4>
+                    </th>
+                    <th>
+                        @{
+                            if (robo.BracoDireito.CotoveloBraco.StatusCotovelo != 4)
+                            {
+                                  <button name="button" class="btn btn-secondary" disabled> Esquerda </button>
+                            }
+                            else
+                            {
+                                if (robo.BracoDireito.PulsoBraco.StatusPulso != 1)
+                                {
+                                    <button name="button" value="DireitaE" formmethod="post" asp-action="AjustarPulso" class="btn btn-outline-primary">Esquerda</button>
+                                }
+                                else
+                                {
+                                //desabilitar botão caso esteja no mínimo
+                                    <button name="button" class="btn btn-secondary" disabled> Esquerda </button>
+                                }
+                            }
+                        }
+                    </th>
+                    <th>
+                         
+                        @{
+                            if (robo.BracoDireito.CotoveloBraco.StatusCotovelo != 4)
+                            {
+                                  <button name="button" class="btn btn-secondary" disabled> Direita </button>
+                            }
+                            else
+                            {
+                                if (robo.BracoDireito.PulsoBraco.StatusPulso != 7)
+                                {
+                                    <button name="button" value="DireitaD" formmethod="post" asp-action="AjustarPulso" class="btn btn-outline-danger">Direita</button>
+                                }
+                                else
+                                {
+                                //desabilitar botão caso esteja no mínimo
+                                    <button name="button" class="btn btn-secondary" disabled> Direita </button>
+                                }
+                            }
+                        }
+                    </th>
+                   
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th>
+                        <h4>Cotovelo Esquerdo: @robo.BracoEsquerdo.CotoveloBraco.DescricaoStatusCotovelo</h4>
+                    </th>
+                    <th>
+                        @{
+                            if (robo.BracoEsquerdo.CotoveloBraco.StatusCotovelo != 1)
+                            {
+                                <button name="button" value="DescontrairE" formmethod="post" asp-action="AjustarCotovelo" class="btn btn-outline-primary">Descontrair</button>
+                            }
+                            else
+                            {
+                                //desabilitar botao caso esteja no máximo
+                                <button name="button" class="btn btn-secondary" disabled> Descontrair </button>
+                            }
+                        }
+                    </th>
+                    <th>
+                        @{
+                            if (robo.BracoEsquerdo.CotoveloBraco.StatusCotovelo != 4)
+                            {
+                                <button name="button" value="ContrairE" formmethod="post" asp-action="AjustarCotovelo" class="btn btn-outline-danger">Contrair</button>
+                            }
+                            else
+                            {
+                                //desabilitar botão caso esteja no mínimo
+                                <button name="button" class="btn btn-secondary" disabled> Contrair </button>
+                            }
+                        }
+                    </th>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <th>
+                        <h4>Pulso Esquerdo: @robo.BracoEsquerdo.PulsoBraco.DescricaoStatusPulso</h4>
+                    </th>
+                    <th>
+                        @{
+                            if (robo.BracoEsquerdo.CotoveloBraco.StatusCotovelo != 4)
+                            {
+                                  <button name="button" class="btn btn-secondary" disabled> Esquerda </button>
+                            }
+                            else
+                            {
+                                if (robo.BracoEsquerdo.PulsoBraco.StatusPulso != 1)
+                                {
+                                    <button name="button" value="EsquerdaE" formmethod="post" asp-action="AjustarPulso" class="btn btn-outline-primary">Esquerda</button>
+                                }
+                                else
+                                {
+                                //desabilitar botão caso esteja no mínimo
+                                    <button name="button" class="btn btn-secondary" disabled> Esquerda </button>
+                                }
+                            }
+                        }
+                    </th>
+                    <th>
+                         
+                        @{
+                            if (robo.BracoEsquerdo.CotoveloBraco.StatusCotovelo != 4)
+                            {
+                                  <button name="button" class="btn btn-secondary" disabled> Direita </button>
+                            }
+                            else
+                            {
+                                if (robo.BracoEsquerdo.PulsoBraco.StatusPulso != 7)
+                                {
+                                    <button name="button" value="EsquerdaD" formmethod="post" asp-action="AjustarPulso" class="btn btn-outline-danger">Direita</button>
+                                }
+                                else
+                                {
+                                //desabilitar botão caso esteja no mínimo
+                                    <button name="button" class="btn btn-secondary" disabled> Direita </button>
+                                }
+                            }
+                        }
+                    </th>
+                   
+                </tr>
+            </thead>
+        </table>
     </form>
 
-    <form>
-        <h4>Rotação da cabeça: @robo.Cabeca.RotacaoCabeca.DescricaoRotacao</h4><br />
-
-         @{
-            if (robo.Cabeca.RotacaoCabeca.StatusRotacao != 1)
-            {
-                <button name="button" value="Cima" formmethod="post" asp-action="AjustarRotacao" class="btn btn-outline-primary">Cima</button>
-            }
-            else
-            {
-            //desabilitar botao caso esteja no máximo
-                  <button name="button" class="btn btn-secondary" disabled> Cima </button>
-            }
-        }
-        @{
-            if (robo.Cabeca.RotacaoCabeca.StatusRotacao != 5)
-            {
-                <button name="button" value="Baixo" formmethod="post" asp-action="AjustarRotacao" class="btn btn-outline-danger">Baixo</button>
-            }
-            else
-            {
-            //desabilitar botão caso esteja no mínimo
-                <button name="button" class="btn btn-secondary" disabled> Baixo </button>
-            }
-        }
-
-
-        <h4>Cotovelo Direito: @robo.BracoDireito.CotoveloBraco.DescricaoStatusCotovelo</h4><br />
-
-        <h4>Pulso Direito: @robo.BracoDireito.PulsoBraco.DescricaoStatusPulso</h4><br />
-
-        <h4>Cotovelo Esquerdo: @robo.BracoEsquerdo.CotoveloBraco.DescricaoStatusCotovelo</h4><br />
-
-        <h4>Pulso Esquerdo: @robo.BracoEsquerdo.PulsoBraco.DescricaoStatusPulso</h4><br />
-    </form>
 </div>
 
 

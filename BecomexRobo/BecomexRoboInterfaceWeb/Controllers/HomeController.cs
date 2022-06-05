@@ -73,11 +73,11 @@ namespace BecomexRoboInterfaceWeb.Controllers
         {
             switch (button)
             {
-                case "Cima":
+                case "Esquerda":
                     //quanto menor o status, maior a inclinacao
                     robo.Cabeca.RotacaoCabeca.StatusRotacao--;
                     break;
-                case "Baixo":
+                case "Direita":
                     //quanto maior o status, menor a inclinação
                     robo.Cabeca.RotacaoCabeca.StatusRotacao++;
                     break;
@@ -86,6 +86,82 @@ namespace BecomexRoboInterfaceWeb.Controllers
             }
             var json = JsonConvert.SerializeObject(robo.Cabeca.InclinacaoCabeca);
             EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+            return View("Index");
+        }
+
+
+        [HttpPost, ActionName("AjustarCotovelo")]
+        public IActionResult AjustarCotovelo(string button)
+        {
+            string? json = null;
+            switch (button)
+            {
+                case "DescontrairD":
+                    //quanto menor o status, menor a contração
+                    robo.BracoDireito.CotoveloBraco.StatusCotovelo--;
+                    json = JsonConvert.SerializeObject(robo.BracoDireito.CotoveloBraco);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    break;
+                case "ContrairD":
+                    //quanto maior o status, maior a contração
+                    robo.BracoDireito.CotoveloBraco.StatusCotovelo++;
+                    json = JsonConvert.SerializeObject(robo.BracoDireito.CotoveloBraco);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    break;
+                case "DescontrairE":
+                    //quanto maior o status, maior a contração
+                    robo.BracoEsquerdo.CotoveloBraco.StatusCotovelo--;
+                    json = JsonConvert.SerializeObject(robo.BracoEsquerdo.CotoveloBraco);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    break;
+                case "ContrairE":
+                    //quanto maior o status, maior a contração
+                    robo.BracoEsquerdo.CotoveloBraco.StatusCotovelo++;
+                    json = JsonConvert.SerializeObject(robo.BracoEsquerdo.CotoveloBraco);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    break;
+                default:
+                    return BadRequest("Status de botão inválido");
+            }
+            return View("Index");
+        }
+
+        [HttpPost, ActionName("AjustarPulso")]
+        public IActionResult AjustarPulso(string button)
+        {
+            string? json = null;
+            //o valor do botão é a junção da função + lado do pulso
+            //Ex: Esquerda ou Direita = Lado do braço
+            // D ou E = Função para esquerda ou direita
+            switch (button)
+            {
+                case "DireitaD":
+                    //braço direito virar para direita
+                    robo.BracoDireito.PulsoBraco.StatusPulso++;
+                    json = JsonConvert.SerializeObject(robo.BracoDireito.PulsoBraco);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    break;
+                case "DireitaE":
+                    //braço direito virar para esquerda
+                    robo.BracoDireito.PulsoBraco.StatusPulso--;
+                    json = JsonConvert.SerializeObject(robo.BracoDireito.PulsoBraco);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    break;
+                case "EsquerdaD":
+                    //braço esquerdo virar para direita
+                    robo.BracoEsquerdo.PulsoBraco.StatusPulso++;
+                    json = JsonConvert.SerializeObject(robo.BracoEsquerdo.PulsoBraco);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    break;
+                case "EsquerdaE":
+                    //braço esquerdo virar para esquerda
+                    robo.BracoEsquerdo.PulsoBraco.StatusPulso--;
+                    json = JsonConvert.SerializeObject(robo.BracoEsquerdo.PulsoBraco);
+                    EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+                    break;
+                default:
+                    return BadRequest("Status de botão inválido");
+            }
             return View("Index");
         }
 
