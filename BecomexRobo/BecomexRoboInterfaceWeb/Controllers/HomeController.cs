@@ -47,31 +47,59 @@ namespace BecomexRoboInterfaceWeb.Controllers
             }
         }
 
-        [HttpPost, ActionName("DiminuirInclinacao")]
-        public IActionResult DiminuirInclinacao()
+        [HttpPost, ActionName("AjustarInclinacao")]
+        public IActionResult AjustarInclinacao(string button)
         {
-            //quanto maior o status, menor a inclinação
-            robo.Cabeca.InclinacaoCabeca.StatusInclinacao++;
-            EnviarInclinacaoApi();
-            return View("Index");
-        }
-
-        [HttpPost, ActionName("AumentarInclinacao")]
-        public IActionResult AumentarInclinacao()
-        {
-            //quanto menor o status, mais alta a inclinação
-            robo.Cabeca.InclinacaoCabeca.StatusInclinacao--;
-            EnviarInclinacaoApi();
-            return View("Index");
-        }
-
-        public void EnviarInclinacaoApi()
-        {
+            switch (button)
+            {
+                case "Cima":
+                    //quanto menor o status, maior a inclinacao
+                    robo.Cabeca.InclinacaoCabeca.StatusInclinacao--;
+                    break;
+                case "Baixo":
+                    //quanto maior o status, menor a inclinação
+                    robo.Cabeca.InclinacaoCabeca.StatusInclinacao++;
+                    break;
+                default:
+                    return BadRequest("Status de botão inválido");
+            }
             var json = JsonConvert.SerializeObject(robo.Cabeca.InclinacaoCabeca);
+            EnviarAlteracoesParaApi(json, urlLocalRoboInclCabeca);
+            return View("Index");
+        }
+
+        [HttpPost, ActionName("AjustarRotacao")]
+        public IActionResult AjustarRotacao(string button)
+        {
+            switch (button)
+            {
+                case "Cima":
+                    //quanto menor o status, maior a inclinacao
+                    robo.Cabeca.RotacaoCabeca.StatusRotacao--;
+                    break;
+                case "Baixo":
+                    //quanto maior o status, menor a inclinação
+                    robo.Cabeca.RotacaoCabeca.StatusRotacao++;
+                    break;
+                default:
+                    return BadRequest("Status de botão inválido");
+            }
+            var json = JsonConvert.SerializeObject(robo.Cabeca.InclinacaoCabeca);
+            EnviarAlteracoesParaApi(json, urlLocalRoboRotCabeca);
+            return View("Index");
+        }
+
+        private void EnviarAlteracoesParaApi(string json, string url)
+        {
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             ViewBag.Robo = robo;
-            client.PostAsync(urlLocalRoboInclCabeca, httpContent);
+            client.PostAsync(url, httpContent);
         }
+
+
+
+
+
 
         public IActionResult Privacy()
         {

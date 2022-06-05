@@ -12,23 +12,23 @@
         @{
             if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao != 1)
             {
-                <button formaction=@Url.Action("AumentarInclinacao") formmethod="post" class="btn btn-outline-primary"> Cima </button>
+                <button name="button" value="Cima" formmethod="post" asp-action="AjustarInclinacao" class="btn btn-outline-primary">Cima</button>
             }
             else
             {
-                //desabilitar botao caso esteja no máximo
-                <button formaction=@Url.Action("AumentarInclinacao") formmethod="post" class="btn btn-secondary" disabled> Cima </button>
+            //desabilitar botao caso esteja no máximo
+                  <button name="button" class="btn btn-secondary" disabled> Cima </button>
             }
         }
         @{
             if (robo.Cabeca.InclinacaoCabeca.StatusInclinacao != 3)
             {
-                <button formaction=@Url.Action("DiminuirInclinacao") formmethod="post" class="btn btn-outline-danger"> Baixo </button>
+                <button name="button" value="Baixo" formmethod="post" asp-action="AjustarInclinacao" class="btn btn-outline-danger">Baixo</button>
             }
             else
             {
-                //desabilitar botão caso esteja no mínimo
-                <button formaction=@Url.Action("DiminuirInclinacao") formmethod="post" class="btn btn-secondary" disabled> Baixo </button>
+            //desabilitar botão caso esteja no mínimo
+                <button name="button" class="btn btn-secondary" disabled> Baixo </button>
             }
         }
 
@@ -39,6 +39,29 @@
 
     <form>
         <h4>Rotação da cabeça: @robo.Cabeca.RotacaoCabeca.DescricaoRotacao</h4><br />
+
+         @{
+            if (robo.Cabeca.RotacaoCabeca.StatusRotacao != 1)
+            {
+                <button name="button" value="Cima" formmethod="post" asp-action="AjustarRotacao" class="btn btn-outline-primary">Cima</button>
+            }
+            else
+            {
+            //desabilitar botao caso esteja no máximo
+                  <button name="button" class="btn btn-secondary" disabled> Cima </button>
+            }
+        }
+        @{
+            if (robo.Cabeca.RotacaoCabeca.StatusRotacao != 5)
+            {
+                <button name="button" value="Baixo" formmethod="post" asp-action="AjustarRotacao" class="btn btn-outline-danger">Baixo</button>
+            }
+            else
+            {
+            //desabilitar botão caso esteja no mínimo
+                <button name="button" class="btn btn-secondary" disabled> Baixo </button>
+            }
+        }
 
 
         <h4>Cotovelo Direito: @robo.BracoDireito.CotoveloBraco.DescricaoStatusCotovelo</h4><br />
