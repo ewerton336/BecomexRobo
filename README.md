@@ -9,7 +9,8 @@
 <h1> Como Executar </h1>
 <br>
 
-<p>No modo de depuração atual, já está configurado para rodar a API na porta 7288 através do JSON de preferências. Caso por algum motivo modifique a porta a ser executada ao compilar, ou queira compilar através do ISS express, será necessário modificar o arquivo HomeController.cs, no projeto BecomexRoboInterfaceWeb,  sendo eles:</p>
+<p> Para executar, basta abrir a solução no Visual Studio, e compilar o Projeto BecomexRoboInterfaceWeb, que compilará tanto a página web quanto API. </p>
+<p>obs:No modo de depuração atual, já está configurado para rodar a API na porta 7288. Caso por algum motivo modifique a porta a ser executada ao compilar, ou queira compilar através do ISS express, será necessário modificar o arquivo HomeController.cs, no projeto BecomexRoboInterfaceWeb,  sendo eles:</p>
 
 ```
         private const string urlLocalRobo = "https://localhost:7288/api/Robo";
